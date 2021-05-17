@@ -4,23 +4,22 @@
 # input example: ruby power_array.rb "[1,2,3,4]" 2 
 # output example: [1, 4, 9, 16]
 
-
 class Array
   def power(x)
-    arr=[]
+    arr = []
     self.each do |value , temp=x|
-      final_val=1
-        while temp!=0
-          temp-=1
-          final_val*=value
+      final_val = 1
+        while temp != 0
+          temp -= 1
+          final_val *= value
         end
-        arr<<final_val
+        arr << final_val
       end
     print arr
     puts
   end
 end
 puts "Please provide an input"
-arr=$stdin.readline.split
-num=arr[1].to_i
+arr = $stdin.readline.split
+num = arr[1].to_i
 arr[0].delete('"[]"').split(',').map!(&:to_i).power(num)

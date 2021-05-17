@@ -8,5 +8,5 @@ class String
   end
 end
 puts "Please provide an input"
-str=gets
+str = gets
 puts str.to_s

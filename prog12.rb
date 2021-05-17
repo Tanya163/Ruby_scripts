@@ -8,18 +8,17 @@
 # Numeric characters = 1
 # Special characters = 1
 
-
 def cases_in_string(str)
-  lc=0;uc=0;num=0;sc=0
+  lc = 0; uc = 0; num = 0; sc = 0
   str.each_char do |c|
     if ('a'..'z').include?(c)
-      lc+=1
+      lc += 1
     elsif ('A'..'Z').include?(c)
-      uc+=1
+      uc += 1
     elsif ('1'..'9').include?(c)
-      num+=1
+      num += 1
     else
-      sc+=1
+      sc += 1
     end
   end
   puts "Lowercase characters = #{lc}"
@@ -28,5 +27,5 @@ def cases_in_string(str)
   puts "Special characters = #{sc}"
 end
 puts "Enter String"
-str=gets.chomp
+str = gets.chomp
 cases_in_string(str)

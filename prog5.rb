@@ -14,41 +14,41 @@
 # Account holder name: Abhishek
 # Account balance: 3200 
 
-
 class Account
   attr_accessor :name, :balance 
-  @@account_no=0
-  def initialize(name,balance)
-    @name=name
-    @balance=balance
+  @@account_no = 0
+  def initialize(name, balance)
+    @name = name
+    @balance = balance
   end
 
   def account_num
-    @@account_no+=1
+    @@account_no += 1
   end
 
   def deposit(transfer_amount)
-    self.balance+=transfer_amount 
+    self.balance += transfer_amount 
   end
   def withdraw(transfer_amount)
-    self.balance-=transfer_amount
+    self.balance -= transfer_amount
   end
   def show
-    puts "Account number: #{self.account_num}"
-    puts "Account holder name: #{self.name}"
-    puts "Account balance: #{self.balance}"
-    puts
+    print "Account number: #{self.account_num}" "\n" "Account holder name: #{self.name}" "\n" "Account balance: #{self.balance}" "\n"
   end
 end
-input=ARGV
-name1=input[0].to_s.split(':')[0].gsub(/\"|\[|\]/ , "")
-balance1=input[0].to_s.split(':')[1].gsub(/\"|\[|\]/ , "").to_i
-name2=input[1].to_s.split(':')[0].gsub(/\"|\[|\]/ , "")
-balance2=input[1].to_s.split(':')[1].gsub(/\"|\[|\]/ , "").to_i
-transfer_amount=input[2].to_s.split(':')[1].gsub(/\"|\[|\]/ , "").to_i
-account_a=Account.new(name1,balance1)
-account_a.withdraw(transfer_amount)
-account_a.show
-account_b=Account.new(name2,balance2)
-account_b.deposit(transfer_amount)
-account_b.show
+input = ARGV
+name1 = input[0].to_s.split(':')[0]
+balance1 = input[0].to_s.split(':')[1].to_i
+name2 = input[1].to_s.split(':')[0]
+balance2 = input[1].to_s.split(':')[1].to_i
+transfer_amount = input[2].to_s.split(':')[1].to_i
+account_a = Account.new(name1, balance1)
+if account_a.balance < transfer_amount
+  puts "Available Balance in account number #{account_a.account_num} is not sufficient for withdrawl"
+else
+  account_a.withdraw(transfer_amount)
+  account_a.show
+  account_b = Account.new(name2, balance2)
+  account_b.deposit(transfer_amount)
+  account_b.show
+end

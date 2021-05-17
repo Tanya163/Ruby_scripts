@@ -6,8 +6,8 @@
 # Interest difference= 100.00 
 
 class Interest
-  RATE_OF_INTEREST= 0.1
-  attr_accessor :p,:t
+  RATE_OF_INTEREST = 0.1
+  attr_accessor :principal,:time
   def initialize
     yield self
   end
@@ -16,17 +16,17 @@ class Interest
   end
   private
     def simple_interest
-      @p+(@p*RATE_OF_INTEREST*@t)
+      @principal + (@principal * RATE_OF_INTEREST * @time)
     end    
     def compound_interest
-      @p*(1+RATE_OF_INTEREST)**@t
+      @principal * (1+RATE_OF_INTEREST) ** @time
     end
 end
-input=ARGV
-principal=input[0].to_f
-time=input[1].to_i
+input = ARGV
+principal = input[0].to_f
+time = input[1].to_i
 Interest.new do |i|
-  i.p=principal
-  i.t=time
+  i.p = principal
+  i.t = time
   i.show_diff
 end
