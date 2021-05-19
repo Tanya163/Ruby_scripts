@@ -19,7 +19,8 @@ class Array
     puts
   end
 end
-puts "Please provide an input"
-arr = $stdin.readline.split
-num = arr[1].to_i
-arr[0].delete('"[]"').split(',').map!(&:to_i).power(num)
+
+arr = ARGV[0]
+arr = arr.slice(1...(arr.size - 1)).split(',').map(&:to_i)
+num = ARGV[1].to_i
+arr.power(num)
