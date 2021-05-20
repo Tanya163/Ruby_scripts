@@ -6,14 +6,18 @@
 # Ex: BajajDiscover 58000 BaggaLink 12
 
 class Vehicle
+
   attr_accessor :name, :price
+  
   def initialize(name, price)
     @name = name
     @price = price.to_f
   end
 end
 class Bike < Vehicle
+
   attr_accessor :dealer, :percent_price_increase
+
   def initialize(name, price, dealer, percent_price_increase)
     super(name, price)
     @dealer = dealer
@@ -23,7 +27,9 @@ class Bike < Vehicle
     @price = @price + @price * (@percent_price_increase/100)
   end
   def to_s
-    "Bike Name: #{@name}\nBike Price: #{@price}\nBike Dealer: #{@dealer}\n\nAfter #{@percent_price_increase} % hike in price:\nBike Name: #{@name}\nBike Price: #{self.price_increase}\nBike Dealer: #{@dealer}"
+    "Bike Name: #{@name}\nBike Price: #{@price}\nBike Dealer: #{@dealer}\n\n
+    After #{@percent_price_increase} % hike in price:\nBike Name: #{@name}\n
+    Bike Price: #{self.price_increase}\nBike Dealer: #{@dealer}"
   end
 end
 

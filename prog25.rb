@@ -21,52 +21,63 @@
 # You have to generate a list that would display the list in a nice format 
 # and the grand total should be rounded to the nearest integer.
 
-
 class List
-  SALES_TAX = 0.1
-  IMPORT_DUTIES = 0.05
-  attr_accessor :hash
-  def initialize(hash)
-    @hash = hash
+
+  attr_accessor :product_name, :price, :imported, :exempted
+  @@grand_total = 0
+
+  def initialize(product_name, price, imported, exempted)
+    @product_name = product_name
+    @price = price
+    @imported = imported
+    @exempted = exempted
   end
+
   def total_price
-    final_list=Hash.new
-    @hash.each do | key, value |
-      if @hash[key][1] == "yes" && @hash[key][2] == "No"
-        @hash[key][0] = hash[key][0] + (@hash[key][0] * SALES_TAX) + (hash[key][0] * IMPORT_DUTIES)
-      elsif @hash[key][1] == "yes" && @hash[key][2] == "Yes"
-        @hash[key][0] = @hash[key][0] + (hash[key][0] * IMPORT_DUTIES)
-      else
-        @hash[key][0] = @hash[key][0]
-      end
-      final_list[key] = @hash[key][0]
-    end
-    return final_list
-  end
-  def show_list_items
-    final_list=self.total_price
-    final_list.each do |item, price|
-      puts "#{item}: #{price.to_i}" 
+    if self.imported == "yes" && self.exempted == "no"
+      self.price += self.price * 0.1 + self.price * 0.05
+      @@grand_total += self.price
+    elsif self.imported == "yes" && self.exempted == "yes"
+      self.price += self.price * 0.05
+      @@grand_total += self.price
+    elsif self.imported == "no" && self.exempted == "no"
+      self.price += self.price * 0.1
+      @@grand_total += self.price
+    else
+      self.price = self.price
+      @@grand_total += self.price
     end
   end
+
+  def self.grand_total
+    return @@grand_total
+  end
+
 end
 
-hash = Hash.new        
+hash = Hash.new 
+key = 0       
 loop do
+  key += 1
   puts "Name of the product:"
   product_name = gets.chomp
   puts "Imported?:"
-  imported = gets.chomp
+  imported = gets.chomp.downcase
   puts "Exempted from sales tax?:"
-  exempted = gets.chomp
+  exempted = gets.chomp.downcase
   puts "Price:"
   price = gets.chomp.to_i
-  hash[product_name] = [price, imported, exempted]
+  list = List.new(product_name, price, imported, exempted)
+  hash[key] = list
   puts "Do you want to add more items to your list(y/n):"
   add_more = gets.chomp
   if add_more != 'y'
     break
   end
 end
-list = List.new(hash)
-list.show_list_items
+
+for i in 1..hash.length
+  hash[i].total_price
+  print "#{hash[i].product_name}: #{hash[i].price}\n"
+end
+puts "Grand Total = #{List.grand_total}"
