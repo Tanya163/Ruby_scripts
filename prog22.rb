@@ -13,13 +13,19 @@ class Name
   def initialize(fname, lname)
     @f_name = fname
     @l_name = lname
+    self.validate
+  end
+
+  def validate
     raise "Firstname must start with uppercase letter" if @f_name[0] !~ /[A-Z]/ 
     raise "Lastname cannot be blank" if @l_name.empty?
-    self.display
   end
+
   def display
     puts "Your name is #{@f_name} #{@l_name}"
   end
 end
+
 input_name = gets.split
 name = Name.new(input_name[0].to_s, input_name[1].to_s)
+name.display if name != nil

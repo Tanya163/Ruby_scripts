@@ -21,7 +21,7 @@
 # You have to generate a list that would display the list in a nice format 
 # and the grand total should be rounded to the nearest integer.
 
-class List
+class Product
 
   attr_accessor :product_name, :price, :imported, :exempted
   @@grand_total = 0
@@ -55,7 +55,7 @@ class List
 
 end
 
-hash = Hash.new 
+list = Hash.new 
 key = 0       
 loop do
   key += 1
@@ -67,8 +67,8 @@ loop do
   exempted = gets.chomp.downcase
   puts "Price:"
   price = gets.chomp.to_i
-  list = List.new(product_name, price, imported, exempted)
-  hash[key] = list
+  product = Product.new(product_name, price, imported, exempted)
+  list[key] = product
   puts "Do you want to add more items to your list(y/n):"
   add_more = gets.chomp
   if add_more != 'y'
@@ -76,8 +76,8 @@ loop do
   end
 end
 
-for i in 1..hash.length
-  hash[i].total_price
-  print "#{hash[i].product_name}: #{hash[i].price}\n"
+for i in 1..list.length
+  list[i].total_price
+  print "#{list[i].product_name}: #{list[i].price}\n"
 end
-puts "Grand Total = #{List.grand_total}"
+puts "Grand Total = #{Product.grand_total.to_i}"
