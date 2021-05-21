@@ -13,14 +13,14 @@ class SumTime
 
   def initialize(array_of_time)
     @array_of_time = array_of_time
+    self.validate
+  end
+
+  def validate
     @array_of_time.each do |time|
       time = PATTERN.match(time)
-      if !time
-        raise "Invalid 24-hour time value"
-        break
-      else
-        sum(time)
-      end
+      raise "Invalid 24-hour time value" if !time
+      sum(time)
     end
   end
 

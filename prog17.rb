@@ -13,13 +13,14 @@ class SumTime
   def initialize(time_1, time_2)
     @time_1 = time_1
     @time_2 = time_2
+    self.validate  
+  end
+
+  def validate
     time1 = PATTERN.match(@time_1)
     time2 = PATTERN.match(@time_2)
-    if time1 && time2
-      sum(time1, time2)
-    else
-      raise "Invalid 24-hour time value"
-    end
+    raise "Invalid 24-hour time value" if !time1 | !time2
+    sum(time1, time2)
   end
 
   def sum(time1, time2)
