@@ -1,0 +1,8 @@
+ Designers
+Mary (Employee_ID: 13)
+Jane (Employee_ID: 17)
+ Developers
+Jack (Employee_ID: 15)
+John (Employee_ID: 12)
+ Tester
+Johny (Employee_ID: 19)
